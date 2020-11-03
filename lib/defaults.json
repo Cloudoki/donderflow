@@ -1,0 +1,13 @@
+{
+  "github": {
+    "apiUrl": "https://github.com",
+    "apiPathPrefix": "/api/v3"
+  },
+  "allowBranch": ["master"],
+  "packages": [],
+  "releaseMessage": "chore(release): %s",
+  "tagPrefix": "v",
+  "changelogPath": "CHANGELOG.md",
+  "changelogTitle": "Change Log",
+  "breakingKeyWord": "BREAKING CHANGE"
+}
