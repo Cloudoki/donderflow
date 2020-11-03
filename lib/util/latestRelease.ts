@@ -13,14 +13,14 @@ export async function latestRelease(ctx: Context, tagPrefix?: string) {
 
     if (ctx.preReleaseTag) {
       // whe only care for the last prerelease with the same preidInfo as the current one
-      if (ctx.preReleaseTag === preidInfo[0]) {
+      if (Array.isArray(preidInfo) && (preidInfo[0] === ctx.preReleaseTag)) {
         tag = foundTag
         break
       }
     }
 
     // default to last release
-    if (!preidInfo) {
+    if (!Array.isArray(preidInfo)) {
       tag = foundTag
       break
     }
