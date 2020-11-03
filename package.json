@@ -20,7 +20,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc && copyfiles -f ./lib/defaults.json ./dist/lib && copyfiles -f ./index.js ./README.md ./licence ./package.json ./dist",
+    "build": "tsc && copyfiles -f ./lib/defaults.json ./dist/lib && copyfiles -f ./index.js ./README.md ./license ./package.json ./dist",
     "prebuild": "yarn lint && rm -rf ./dist",
     "lint": "eslint 'lib/**/*.{ts,js}'"
   },
