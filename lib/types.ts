@@ -64,10 +64,6 @@ export type packageInfo = { folderPath: string; pkgName: string; pkgVersion: str
 
 export interface Context {
   config: {
-    github: {
-      apiUrl: string,
-      apiPathPrefix: string,
-    },
     allowBranch: string[],
     packages: string[],
     releaseMessage: string,

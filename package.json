@@ -1,22 +1,26 @@
 {
-  "name": "donderflow",
-  "version": "1.0.0",
+  "name": "@cloudoki/donderflow",
+  "version": "1.0.0-alpha.0",
+  "keywords": ["semver", "release", "management", "cli", "tool"],
   "main": "index.js",
   "bin": {
     "donderflow": "./index.js"
   },
   "author": "mstrk <mstrk512@gmail.com> (https://github.com/mstrk)",
   "license": "MIT",
-  "homepage": "https://github.com/mstrk/donderflow.git#readme",
+  "homepage": "https://github.com/Cloudoki/donderflow.git#readme",
   "bugs": {
-    "url": "https://github.com/mstrk/donderflow/issues"
+    "url": "https://github.com/Cloudoki/donderflow/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mstrk/donderflow.git"
+    "url": "https://github.comCloudoki/donderflow.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
-    "build": "tsc && copyfiles -f \"./lib/defaults.json\" ./dist",
+    "build": "tsc && copyfiles -f ./lib/defaults.json ./dist/lib && copyfiles -f ./index.js ./README.md ./licence ./package.json ./dist",
     "prebuild": "yarn lint && rm -rf ./dist",
     "lint": "eslint 'lib/**/*.{ts,js}'"
   },

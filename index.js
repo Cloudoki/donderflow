@@ -5,7 +5,7 @@ if (process.version.match(/v(\d+)\./)[1] < 12) {
 } else {
   const [,, ...args] = process.argv
 
-  require('./dist/main')(args)
+  require('./lib/main')(args)
     .catch((error) => {
       console.log(error)
       process.exit(1)
