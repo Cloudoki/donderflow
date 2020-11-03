@@ -1,6 +1,6 @@
 {
   "name": "@cloudoki/donderflow",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "keywords": ["semver", "release", "management", "cli", "tool"],
   "main": "index.js",
   "bin": {
