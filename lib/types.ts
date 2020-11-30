@@ -74,6 +74,7 @@ export interface Context {
     repository?: string,
     debug?: boolean,
     dryRun?: boolean,
+    bumpFilesFunc?: string,
   },
   rootName: string,
   rootVersion: string,
@@ -100,3 +101,5 @@ export interface Context {
 export type WriteRefs = Record<CommitReferenceAction, CommitReference>
 
 export type TagInfo = { version: string; gitTag: string }
+
+export type BumpFilesFunc = (config: { version?: string; folderPath?: string }) => Promise<void>;
