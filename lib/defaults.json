@@ -5,7 +5,7 @@
   },
   "allowBranch": ["master"],
   "packages": [],
-  "releaseMessage": "chore(release): %s",
+  "releaseMessage": "chore(release): [ci skip] %s",
   "tagPrefix": "v",
   "changelogPath": "CHANGELOG.md",
   "changelogTitle": "Change Log",
