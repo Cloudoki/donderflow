@@ -1,12 +1,13 @@
 import * as path from 'path'
+import * as gitUrlParse from 'git-url-parse'
 import logger from './util/logger'
 import { createGithubClient } from './util/createGithubClient'
 import { currentBranchName } from './util/git'
 import { JSONFileData } from './util/JSONFileData'
 import { normalizedPackages } from './util/normalizedPackages'
-import { repository } from './util/repository'
 
 import { ArgFlag, Context } from './types'
+import { isObj } from './util/isObj'
 
 export async function initializeContext(args: string[]): Promise<Context> {
   try {
@@ -19,6 +20,14 @@ export async function initializeContext(args: string[]): Promise<Context> {
       JSONFileData(path.resolve(__dirname, 'defaults.json')),
       JSONFileData('donderflow.json'),
     ])
+
+    if (typeof pkgData.repository !== 'string') {
+      if (!isObj(pkgData.repository) || typeof pkgData.repository.url !== 'string') {
+        throw new Error('package.json repository property not found.')
+      } else {
+        pkgData.repository = pkgData.repository.url
+      }
+    }
 
     const hasFlag = (flag: ArgFlag) => args.some((value) => value.startsWith(`--${flag}`))
 
@@ -46,6 +55,11 @@ export async function initializeContext(args: string[]): Promise<Context> {
         dryRun: hasFlag('dry-run'),
         ...defaults,
         ...userDefaults,
+        repository: {
+          raw: pkgData.repository,
+          token: process.env.GH_TOKEN,
+          ...gitUrlParse(pkgData.repository),
+        },
       },
       rootName: pkgData.name,
       rootVersion: pkgData.version,
@@ -59,8 +73,6 @@ export async function initializeContext(args: string[]): Promise<Context> {
       flagValues,
       githubApi: createGithubClient(process.env.GH_TOKEN),
     }
-
-    repository(ctx, pkgData.repository)
 
     const branchName = await currentBranchName()
 

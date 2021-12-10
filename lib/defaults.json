@@ -1,7 +1,7 @@
 {
   "allowBranch": ["master"],
   "packages": [],
-  "releaseMessage": "chore(release): [ci skip] %s",
+  "releaseMessage": "chore(release): %s",
   "tagPrefix": "v",
   "changelogPath": "CHANGELOG.md",
   "changelogTitle": "Change Log",

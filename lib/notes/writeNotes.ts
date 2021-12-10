@@ -7,7 +7,7 @@ function writeHead(ctx: Context) {
 
   if (prevTag != null) {
     return `<a name="${nextTag}"></a>
-## [${nextTag}](${ctx.config.repository}/compare/${prevTag}...${nextTag})
+## [${nextTag}](${ctx.config.repository.raw}/compare/${prevTag}...${nextTag})
 ###### *${dateFormat(new Date(), 'mmm d, yyyy')}*`
   }
 
@@ -29,7 +29,7 @@ function writeScope(scope: string) {
 }
 
 function writeLine(ctx: Context, nested: boolean, text: string, hash?: string, refs?: WriteRefs) {
-  const hashStr = hash ? ` ([${hash}](${ctx.config.repository}/commit/${hash}))` : ''
+  const hashStr = hash ? ` ([${hash}](${ctx.config.repository.raw}/commit/${hash}))` : ''
   let refsStr = ''
 
   if (refs) {
@@ -47,7 +47,7 @@ function writeLine(ctx: Context, nested: boolean, text: string, hash?: string, r
       refsStr += `${actionKey}`
 
       action.forEach((issue) => {
-        refsStr += ` [${issue.prefix + issue.issue}](${ctx.config.repository}/issues/${issue.issue})`
+        refsStr += ` [${issue.prefix + issue.issue}](${ctx.config.repository.raw}/issues/${issue.issue})`
       })
     })
   }

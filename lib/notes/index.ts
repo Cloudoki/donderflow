@@ -1,4 +1,3 @@
-import * as gitUrlParse from 'git-url-parse'
 import { Context } from '../types'
 import { bumpFiles } from '../util/bumpFiles'
 import { commit, pushWithTags, tag } from '../util/git'
@@ -25,7 +24,7 @@ export async function createReleaseNotes(ctx: Context, folderPath?: string) {
     await tag(ctx.nextRelease.gitTag)
     await pushWithTags()
 
-    const { owner, name } = gitUrlParse(ctx.config.repository)
+    const { owner, name } = ctx.config.repository
 
     const result = await ctx.githubApi.repos.createRelease({
       owner: owner,

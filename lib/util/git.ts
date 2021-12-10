@@ -11,22 +11,49 @@ export async function gitTags(tagPrefix: string): Promise<TagInfo[]> {
 }
 
 export async function gitTagHead(tagName: string) {
-  return execa.stdout('git', ['rev-list', '-1', tagName])
+  return execa.stdout('git', [
+    'rev-list',
+    '-1',
+    tagName,
+  ])
 }
 
 export async function tag (tagName: string) {
-  return execa('git', ['tag', '-a', tagName, '-m', tagName])
+  return execa('git', [
+    'tag',
+    '-a',
+    tagName,
+    '-m',
+    tagName,
+  ])
 }
 
 export async function pushWithTags() {
-  return execa('git', ['push', '--follow-tags'])
+  return execa('git', [
+    'push',
+    '--follow-tags',
+  ])
 }
 
 export async function commit(message: string) {
   await execa('git', ['add', '--all'])
-  await execa('git', ['commit', '-m', message])
+  await execa('git', [
+    'commit',
+    // TODO: using cloudoki deploy info for commits atm - revise this
+    '--author="cloudoki-deploy <general@cloudoki.com>"',
+    '-m',
+    message,
+  ])
 }
 
 export async function currentBranchName() {
-  return execa.stdout('git', ['rev-parse', '--abbrev-ref', 'HEAD'])
+  return execa.stdout('git', [
+    'rev-parse',
+    '--abbrev-ref',
+    'HEAD',
+  ])
+}
+
+export async function status() {
+  return execa.stdout('git', ['status'])
 }

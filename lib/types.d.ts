@@ -1,5 +1,6 @@
 import { Signale } from 'signale'
 import { Octokit } from '@octokit/rest'
+import { GitUrl } from 'git-url-parse'
 
 export type PkgRepoObject = { url: string }
 
@@ -71,7 +72,7 @@ export interface Context {
     changelogPath: string,
     changelogTitle: string,
     breakingKeyWord: string,
-    repository?: string,
+    repository: Omit<GitUrl, 'toString'> & { raw: string; token: string },
     debug?: boolean,
     dryRun?: boolean,
     bumpFilesFunc?: string,
