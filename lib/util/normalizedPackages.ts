@@ -1,25 +1,25 @@
-import * as execa from 'execa'
+import * as execa from "execa";
 
-const wildcard = '/*'
+const wildcard = "/*";
 
 export async function normalizedPackages(packages: string[]) {
-  let paths = []
+  let paths = [];
 
   for (const pkg of packages) {
-    const wildcrdIndex = pkg.lastIndexOf(wildcard)
+    const wildcrdIndex = pkg.lastIndexOf(wildcard);
 
     if (wildcrdIndex > -1) {
-      const folder = pkg.replace(wildcard, '')
-      const out = await execa.stdout('ls', [folder])
-      const fullPaths = out.split('\n').map((path: string) => `${folder}/${path}`)
+      const folder = pkg.replace(wildcard, "");
+      const out = await execa.stdout("ls", [folder]);
+      const fullPaths = out.split("\n").map((path: string) => `${folder}/${path}`);
 
-      paths = paths.concat(fullPaths)
+      paths = paths.concat(fullPaths);
 
-      continue
+      continue;
     }
 
-    paths.push(pkg)
+    paths.push(pkg);
   }
 
-  return [...new Set<string>(paths)]
+  return [...new Set<string>(paths)];
 }

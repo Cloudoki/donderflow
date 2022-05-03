@@ -1,36 +1,36 @@
-import * as semver from 'semver'
-import { gitTags, gitTagHead } from './git'
-import { Context, TagInfo } from '../types'
+import * as semver from "semver";
+import { gitTags, gitTagHead } from "./git";
+import { Context, TagInfo } from "../types";
 
 export async function latestRelease(ctx: Context, tagPrefix?: string) {
-  const tags = await gitTags(tagPrefix || ctx.config.tagPrefix)
+  const tags = await gitTags(tagPrefix || ctx.config.tagPrefix);
 
-  let tag: TagInfo
+  let tag: TagInfo;
 
   // look for the last prerelease with same preid - default to last release
   for (const foundTag of tags) {
-    const preidInfo = semver.prerelease(foundTag.version)
+    const preidInfo = semver.prerelease(foundTag.version);
 
     if (ctx.preReleaseTag) {
       // whe only care for the last prerelease with the same preidInfo as the current one
-      if (Array.isArray(preidInfo) && (preidInfo[0] === ctx.preReleaseTag)) {
-        tag = foundTag
-        break
+      if (Array.isArray(preidInfo) && preidInfo[0] === ctx.preReleaseTag) {
+        tag = foundTag;
+        break;
       }
     }
 
     // default to last release
     if (!Array.isArray(preidInfo)) {
-      tag = foundTag
-      break
+      tag = foundTag;
+      break;
     }
   }
 
   if (tag) {
-    ctx.config.debug && ctx.logger.info('Last version found %s', tag.version)
+    ctx.config.debug && ctx.logger.info("Last version found %s", tag.version);
 
-    ctx.lastRelease = { head: await gitTagHead(tag.gitTag), ...tag }
+    ctx.lastRelease = { head: await gitTagHead(tag.gitTag), ...tag };
   } else if (ctx.config.debug) {
-    ctx.logger.info('No last version found')
+    ctx.logger.info("No last version found");
   }
 }

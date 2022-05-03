@@ -1,13 +1,13 @@
-import { Signale } from 'signale'
+import { Signale } from "signale";
 
 const options = {
   disabled: false,
   interactive: false,
   stream: process.stdout,
-  scope: 'donderflow',
+  scope: "donderflow",
   config: {
     displayLabel: false,
   },
-}
+};
 
-export default new Signale(options)
+export default new Signale(options);
